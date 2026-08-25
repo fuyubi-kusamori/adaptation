@@ -194,6 +194,20 @@ footer p {
     <p class="header-sub">小説・エッセイ・ノンフィクション原作の最新映像化情報</p>
   </header>
 
+  <div id="pw-screen" style="text-align:center; padding: 4rem 0;">
+    <p style="font-family: var(--font-en); font-size:0.8rem; letter-spacing:0.2em; color:var(--ink-soft); text-transform:uppercase; margin-bottom:1.2rem;">Password</p>
+    <div style="display:flex; gap:0.5rem; justify-content:center; align-items:center;">
+      <input type="password" id="pw-input" placeholder="パスワードを入力"
+        style="font-family:var(--font-ja); font-size:0.85rem; padding:0.5rem 1rem;
+               border:1px solid var(--ink-faint); border-radius:4px;
+               background:rgba(255,252,245,0.8); color:var(--ink); outline:none; width:200px;"
+        onkeydown="if(event.key==='Enter') checkPw()">
+      <button class="btn-primary" onclick="checkPw()">入室</button>
+    </div>
+    <p id="pw-error" style="font-size:0.75rem; color:#a03020; margin-top:0.75rem; display:none;">パスワードが違います</p>
+  </div>
+
+  <div id="main-content" style="display:none;">
   <div class="controls">
     <select id="period">
       <option value="upcoming">公開予定・近日</option>
@@ -227,12 +241,34 @@ footer p {
     <p>「取得する」を押すと<br>最新の映像化原作情報が表示されます</p>
   </div>
 
+  </div><!-- /main-content -->
   <footer>
     <p>Book covers &amp; ISBN: Open Library API &nbsp;·&nbsp; Data: Google Gemini + Search Grounding &nbsp;·&nbsp; Manga excluded</p>
   </footer>
 </div>
 
 <script>
+// パスワードはVercel環境変数 SITE_PASSWORD で管理
+// ここには書かない — サーバー側で照合する
+async function checkPw() {
+  const pw = document.getElementById('pw-input').value;
+  const err = document.getElementById('pw-error');
+  if (!pw) return;
+  const res = await fetch('/api/auth', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ password: pw })
+  });
+  if (res.ok) {
+    document.getElementById('pw-screen').style.display = 'none';
+    document.getElementById('main-content').style.display = 'block';
+    err.style.display = 'none';
+  } else {
+    err.style.display = 'block';
+    document.getElementById('pw-input').value = '';
+  }
+}
+
 async function startSearch() {
   const btn       = document.getElementById('searchBtn');
   const spinner   = document.getElementById('spinner');

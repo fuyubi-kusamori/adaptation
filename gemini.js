@@ -27,16 +27,8 @@ export default async function handler(req, res) {
       return res.status(response.status).json(data);
     }
 
-    // テキスト部分だけ抽出してフロントに返す
-    const parts = data?.candidates?.[0]?.content?.parts ?? [];
-    const text = parts
-      .filter(p => typeof p.text === 'string')
-      .map(p => p.text)
-      .join('');
-
-    console.log('[gemini] raw text:', text.slice(0, 500));
-
-    return res.status(200).json({ text });
+    // レスポンス全体をそのまま返してデバッグ
+    return res.status(200).json(data);
 
   } catch (error) {
     if (error.name === 'TimeoutError') {

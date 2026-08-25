@@ -9,7 +9,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Josefin+Slab:ital,wght@0,300;0,400;0,600;1,300&family=Shippori+Mincho:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
 :root {
   --ink:      #1c1a16;
   --ink-mid:  #4a4640;
@@ -25,7 +24,6 @@
   --font-ja: 'Shippori Mincho', 'Hiragino Mincho ProN', serif;
   --font-en: 'Josefin Slab', serif;
 }
-
 body {
   font-family: var(--font-ja);
   background-color: var(--paper);
@@ -34,372 +32,156 @@ body {
   overflow-x: hidden;
   position: relative;
 }
-
-/* ── 背景：光の粒子ノイズ ── */
 body::before {
   content: '';
-  position: fixed;
-  inset: 0;
+  position: fixed; inset: 0;
   background-image:
     radial-gradient(ellipse 80% 60% at 20% 0%, rgba(210,185,130,0.22) 0%, transparent 55%),
     radial-gradient(ellipse 60% 80% at 85% 100%, rgba(180,155,100,0.15) 0%, transparent 50%),
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
-  z-index: 0;
-  pointer-events: none;
+  z-index: 0; pointer-events: none;
 }
-
-/* ── 細い幾何学ライン装飾 ── */
 body::after {
   content: '';
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  height: 2px;
+  position: fixed; top: 0; left: 0; right: 0; height: 2px;
   background: linear-gradient(90deg, transparent 0%, var(--gold) 30%, var(--gold-lt) 50%, var(--gold) 70%, transparent 100%);
-  z-index: 10;
-  opacity: 0.7;
+  z-index: 10; opacity: 0.7;
 }
-
 .page-wrap {
-  position: relative;
-  z-index: 1;
-  max-width: 900px;
-  margin: 0 auto;
+  position: relative; z-index: 1;
+  max-width: 900px; margin: 0 auto;
   padding: 3rem 1.5rem 4rem;
 }
-
-/* ── ヘッダー ── */
 header {
-  text-align: center;
-  margin-bottom: 3rem;
-  padding-bottom: 2rem;
-  position: relative;
+  text-align: center; margin-bottom: 3rem;
+  padding-bottom: 2rem; position: relative;
 }
-
 header::after {
-  content: '';
-  position: absolute;
-  bottom: 0; left: 50%;
-  transform: translateX(-50%);
+  content: ''; position: absolute;
+  bottom: 0; left: 50%; transform: translateX(-50%);
   width: 80px; height: 1px;
   background: linear-gradient(90deg, transparent, var(--gold), transparent);
 }
-
 .header-eyebrow {
-  font-family: var(--font-en);
-  font-size: 0.72rem;
-  font-weight: 300;
-  letter-spacing: 0.25em;
-  color: var(--gold);
-  text-transform: uppercase;
-  margin-bottom: 0.75rem;
+  font-family: var(--font-en); font-size: 0.72rem; font-weight: 300;
+  letter-spacing: 0.25em; color: var(--gold);
+  text-transform: uppercase; margin-bottom: 0.75rem;
 }
-
 h1 {
-  font-size: clamp(1.6rem, 4vw, 2.4rem);
-  font-weight: 500;
-  letter-spacing: 0.12em;
-  line-height: 1.2;
-  color: var(--ink);
-  margin-bottom: 0.5rem;
+  font-size: clamp(1.6rem, 4vw, 2.4rem); font-weight: 500;
+  letter-spacing: 0.12em; line-height: 1.2;
+  color: var(--ink); margin-bottom: 0.5rem;
 }
-
-.header-sub {
-  font-size: 0.8rem;
-  color: var(--ink-soft);
-  letter-spacing: 0.08em;
-}
-
-/* ── コントロール ── */
+.header-sub { font-size: 0.8rem; color: var(--ink-soft); letter-spacing: 0.08em; }
 .controls {
-  display: flex;
-  gap: 0.75rem;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 1rem;
-  padding: 1.25rem 1.5rem;
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
+  display: flex; gap: 0.75rem; flex-wrap: wrap;
+  justify-content: center; align-items: center;
+  margin-bottom: 1rem; padding: 1.25rem 1.5rem;
+  background: var(--glass-bg); border: 1px solid var(--glass-border);
   border-radius: var(--radius-card);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
 }
-
 select {
-  font-family: var(--font-ja);
-  font-size: 0.8rem;
-  padding: 0.5rem 1rem;
-  border: 1px solid var(--ink-faint);
-  border-radius: 4px;
-  background: rgba(255,252,245,0.8);
-  color: var(--ink);
-  cursor: pointer;
-  letter-spacing: 0.05em;
-  outline: none;
-  transition: border-color 0.2s;
+  font-family: var(--font-ja); font-size: 0.8rem;
+  padding: 0.5rem 1rem; border: 1px solid var(--ink-faint);
+  border-radius: 4px; background: rgba(255,252,245,0.8);
+  color: var(--ink); cursor: pointer; letter-spacing: 0.05em;
+  outline: none; transition: border-color 0.2s;
 }
-
 select:focus { border-color: var(--gold); }
-
 .btn-primary {
-  font-family: var(--font-en);
-  font-size: 0.78rem;
-  font-weight: 600;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  padding: 0.55rem 1.6rem;
-  border: 1.5px solid var(--gold);
-  border-radius: 4px;
-  background: transparent;
-  color: var(--gold);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+  font-family: var(--font-en); font-size: 0.78rem; font-weight: 600;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  padding: 0.55rem 1.6rem; border: 1.5px solid var(--gold);
+  border-radius: 4px; background: transparent; color: var(--gold);
+  cursor: pointer; display: flex; align-items: center; gap: 0.5rem;
   transition: background 0.2s, color 0.2s;
 }
-
-.btn-primary:hover:not(:disabled) {
-  background: var(--gold);
-  color: #fff;
-}
-
-.btn-primary:disabled {
-  opacity: 0.45;
-  cursor: not-allowed;
-}
-
+.btn-primary:hover:not(:disabled) { background: var(--gold); color: #fff; }
+.btn-primary:disabled { opacity: 0.45; cursor: not-allowed; }
 .spinner {
-  width: 13px; height: 13px;
-  border: 1.5px solid currentColor;
-  border-top-color: transparent;
-  border-radius: 50%;
-  animation: spin 0.7s linear infinite;
-  display: none;
+  width: 13px; height: 13px; border: 1.5px solid currentColor;
+  border-top-color: transparent; border-radius: 50%;
+  animation: spin 0.7s linear infinite; display: none;
 }
-
 @keyframes spin { to { transform: rotate(360deg); } }
-
-/* ── ステータス ── */
 .status-bar {
-  text-align: center;
-  font-size: 0.75rem;
-  color: var(--ink-soft);
-  letter-spacing: 0.08em;
-  min-height: 1.5rem;
-  margin-bottom: 1.5rem;
+  text-align: center; font-size: 0.75rem; color: var(--ink-soft);
+  letter-spacing: 0.08em; min-height: 1.5rem; margin-bottom: 1.5rem;
 }
-
 .error-msg {
-  text-align: center;
-  font-size: 0.8rem;
-  color: #a03020;
-  padding: 0.75rem 1rem;
-  background: rgba(200,80,50,0.06);
-  border: 1px solid rgba(200,80,50,0.2);
-  border-radius: 6px;
-  display: none;
-  margin-bottom: 1.5rem;
+  text-align: center; font-size: 0.8rem; color: #a03020;
+  padding: 0.75rem 1rem; background: rgba(200,80,50,0.06);
+  border: 1px solid rgba(200,80,50,0.2); border-radius: 6px;
+  display: none; margin-bottom: 1.5rem;
 }
-
-/* ── グリッド ── */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   gap: 1.25rem;
 }
-
-/* ── カード ── */
 .card {
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-card);
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  background: var(--glass-bg); border: 1px solid var(--glass-border);
+  border-radius: var(--radius-card); overflow: hidden;
+  display: flex; flex-direction: column;
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
   transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
 }
-
 .card:hover {
   transform: translateY(-3px);
   box-shadow: 0 12px 36px rgba(28,26,22,0.1), 0 2px 8px rgba(184,150,62,0.08);
   border-color: rgba(184,150,62,0.38);
 }
-
-/* カバー */
 .cover-wrap {
   height: 170px;
   background: linear-gradient(160deg, var(--paper-2) 0%, var(--paper) 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  position: relative;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden; position: relative;
 }
-
-.cover-wrap img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0.92;
-}
-
+.cover-wrap img { width: 100%; height: 100%; object-fit: cover; opacity: 0.92; }
 .cover-placeholder {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-  color: var(--ink-faint);
-  font-size: 0.72rem;
-  letter-spacing: 0.06em;
+  display: flex; flex-direction: column; align-items: center;
+  gap: 0.5rem; color: var(--ink-faint); font-size: 0.72rem; letter-spacing: 0.06em;
 }
-
-/* バッジ */
-.badge-wrap {
-  position: absolute;
-  top: 9px; left: 9px;
-  display: flex; gap: 4px;
-}
-
+.badge-wrap { position: absolute; top: 9px; left: 9px; display: flex; gap: 4px; }
 .badge {
-  font-family: var(--font-en);
-  font-size: 0.6rem;
-  font-weight: 600;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  padding: 2px 8px;
-  border-radius: 2px;
-  backdrop-filter: blur(6px);
+  font-family: var(--font-en); font-size: 0.6rem; font-weight: 600;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  padding: 2px 8px; border-radius: 2px; backdrop-filter: blur(6px);
 }
-
-.badge-film   { background: rgba(28,26,22,0.82); color: #e8e0d0; }
-.badge-drama  { background: rgba(60,45,120,0.82); color: #d8d0f0; }
-.badge-anime  { background: rgba(140,50,30,0.82); color: #f0d0c0; }
-.badge-new    { background: rgba(184,150,62,0.18); color: var(--gold); border: 1px solid rgba(184,150,62,0.4); }
-
-/* カード本文 */
+.badge-film  { background: rgba(28,26,22,0.82); color: #e8e0d0; }
+.badge-drama { background: rgba(60,45,120,0.82); color: #d8d0f0; }
+.badge-anime { background: rgba(140,50,30,0.82); color: #f0d0c0; }
+.badge-new   { background: rgba(184,150,62,0.18); color: var(--gold); border: 1px solid rgba(184,150,62,0.4); }
 .card-body {
-  padding: 1rem 1.1rem 1.1rem;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
+  padding: 1rem 1.1rem 1.1rem; flex: 1;
+  display: flex; flex-direction: column; gap: 0.3rem;
 }
-
-.card-original {
-  font-size: 0.95rem;
-  font-weight: 600;
-  line-height: 1.4;
-  color: var(--ink);
-  letter-spacing: 0.04em;
-}
-
-.card-author {
-  font-size: 0.75rem;
-  color: var(--ink-soft);
-  letter-spacing: 0.06em;
-}
-
-.card-release {
-  font-family: var(--font-en);
-  font-size: 0.72rem;
-  font-weight: 400;
-  letter-spacing: 0.08em;
-  color: var(--gold);
-  margin-top: 0.25rem;
-}
-
-.card-film-title {
-  font-size: 0.8rem;
-  font-weight: 500;
-  color: var(--ink-mid);
-  letter-spacing: 0.04em;
-}
-
-.card-cast {
-  font-size: 0.72rem;
-  color: var(--ink-soft);
-  line-height: 1.5;
-}
-
-.card-synopsis {
-  font-size: 0.72rem;
-  color: var(--ink-soft);
-  line-height: 1.6;
-  margin-top: 0.1rem;
-}
-
-/* ISBN */
+.card-original { font-size: 0.95rem; font-weight: 600; line-height: 1.4; color: var(--ink); letter-spacing: 0.04em; }
+.card-author   { font-size: 0.75rem; color: var(--ink-soft); letter-spacing: 0.06em; }
+.card-release  { font-family: var(--font-en); font-size: 0.72rem; font-weight: 400; letter-spacing: 0.08em; color: var(--gold); margin-top: 0.25rem; }
+.card-film-title { font-size: 0.8rem; font-weight: 500; color: var(--ink-mid); letter-spacing: 0.04em; }
+.card-cast     { font-size: 0.72rem; color: var(--ink-soft); line-height: 1.5; }
+.card-synopsis { font-size: 0.72rem; color: var(--ink-soft); line-height: 1.6; margin-top: 0.1rem; }
 .isbn-wrap {
-  margin-top: auto;
-  padding-top: 0.65rem;
+  margin-top: auto; padding-top: 0.65rem;
   border-top: 1px solid rgba(184,150,62,0.15);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  display: flex; justify-content: space-between; align-items: center;
 }
-
-.isbn-label {
-  font-family: var(--font-en);
-  font-size: 0.6rem;
-  font-weight: 300;
-  letter-spacing: 0.2em;
-  color: var(--ink-faint);
-  text-transform: uppercase;
-}
-
-.isbn-val {
-  font-family: var(--font-en);
-  font-size: 0.7rem;
-  font-weight: 300;
-  letter-spacing: 0.05em;
-  color: var(--ink-mid);
-}
-
-/* 空の状態 */
-.empty-state {
-  text-align: center;
-  padding: 4rem 0;
-  color: var(--ink-soft);
-}
-
-.empty-state .empty-icon {
-  margin-bottom: 1.2rem;
-  opacity: 0.3;
-}
-
-.empty-state p {
-  font-size: 0.85rem;
-  letter-spacing: 0.06em;
-  line-height: 1.8;
-}
-
-/* フッター */
-footer {
-  text-align: center;
-  margin-top: 3.5rem;
-  padding-top: 1.5rem;
-  position: relative;
-}
-
+.isbn-label { font-family: var(--font-en); font-size: 0.6rem; font-weight: 300; letter-spacing: 0.2em; color: var(--ink-faint); text-transform: uppercase; }
+.isbn-val   { font-family: var(--font-en); font-size: 0.7rem; font-weight: 300; letter-spacing: 0.05em; color: var(--ink-mid); }
+.empty-state { text-align: center; padding: 4rem 0; color: var(--ink-soft); }
+.empty-state .empty-icon { margin-bottom: 1.2rem; opacity: 0.3; }
+.empty-state p { font-size: 0.85rem; letter-spacing: 0.06em; line-height: 1.8; }
+footer { text-align: center; margin-top: 3.5rem; padding-top: 1.5rem; position: relative; }
 footer::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 50%;
-  transform: translateX(-50%);
+  content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
   width: 60px; height: 1px;
   background: linear-gradient(90deg, transparent, var(--gold-lt), transparent);
 }
-
 footer p {
-  font-family: var(--font-en);
-  font-size: 0.65rem;
-  font-weight: 300;
-  letter-spacing: 0.18em;
-  color: var(--ink-faint);
-  text-transform: uppercase;
+  font-family: var(--font-en); font-size: 0.65rem; font-weight: 300;
+  letter-spacing: 0.18em; color: var(--ink-faint); text-transform: uppercase;
 }
 </style>
 </head>
@@ -432,7 +214,6 @@ footer p {
 
   <div class="status-bar" id="statusBar"></div>
   <div class="error-msg" id="errorMsg"></div>
-
   <div class="grid" id="grid"></div>
 
   <div class="empty-state" id="emptyState">
@@ -447,89 +228,89 @@ footer p {
   </div>
 
   <footer>
-    <p>Book covers &amp; ISBN: Open Library API &nbsp;·&nbsp; Data: Claude AI with Web Search &nbsp;·&nbsp; Manga excluded</p>
+    <p>Book covers &amp; ISBN: Open Library API &nbsp;·&nbsp; Data: Google Gemini + Search Grounding &nbsp;·&nbsp; Manga excluded</p>
   </footer>
 </div>
 
 <script>
 async function startSearch() {
-  const btn = document.getElementById('searchBtn');
-  const spinner = document.getElementById('spinner');
-  const label = document.getElementById('btnLabel');
+  const btn       = document.getElementById('searchBtn');
+  const spinner   = document.getElementById('spinner');
+  const label     = document.getElementById('btnLabel');
   const statusBar = document.getElementById('statusBar');
-  const errorMsg = document.getElementById('errorMsg');
-  const grid = document.getElementById('grid');
-  const emptyState = document.getElementById('emptyState');
+  const errorMsg  = document.getElementById('errorMsg');
+  const grid      = document.getElementById('grid');
+  const emptyState= document.getElementById('emptyState');
 
   btn.disabled = true;
   spinner.style.display = 'block';
   label.textContent = '検索中';
-  statusBar.textContent = 'ウェブ検索で最新情報を取得しています…';
+  statusBar.textContent = 'Google検索で最新情報を取得しています…';
   errorMsg.style.display = 'none';
   grid.innerHTML = '';
   emptyState.style.display = 'none';
 
   const period = document.getElementById('period').value;
-  const type = document.getElementById('type').value;
+  const type   = document.getElementById('type').value;
   const periodLabel = { upcoming:'公開予定・近日', recent:'直近3ヶ月', thisyear:'今年' }[period];
-  const typeLabel = { all:'映画・ドラマ・アニメ', movie:'映画', drama:'ドラマ', anime:'アニメ' }[type];
+  const typeLabel   = { all:'映画・ドラマ・アニメ', movie:'映画', drama:'ドラマ', anime:'アニメ' }[type];
 
-  const prompt = `あなたは日本の高校図書館司書のアシスタントです。
-以下の条件で、小説・エッセイ・ノンフィクション（漫画・コミック・ライトノベル原作は除く）を原作とした映像化作品の情報を、ウェブ検索で調べてください。
+  const prompt = `あなたは日本の高校図書館司書のアシスタントです。Google検索を使って、以下の条件で最新の映像化情報を調べてください。
 
 条件:
 - 期間: ${periodLabel}
 - 種別: ${typeLabel}
-- 漫画・コミック原作は除外
-- 日本の作品を中心に（海外原作の日本映像化も含む）
+- 小説・エッセイ・ノンフィクション原作のみ（漫画・コミック・ライトノベル原作は除外）
+- 日本の作品を中心に（海外原作の日本映像化も可）
 
-以下のJSON形式のみで返答してください（説明文・前置き・マークダウン・コードブロックは不要）:
+以下のJSON配列のみで返答してください。説明文・前置き・マークダウン・コードブロックは不要です:
 [
   {
     "title": "映像作品タイトル",
     "originalTitle": "原作書籍タイトル",
     "author": "著者名",
-    "type": "movie|drama|anime",
-    "releaseDate": "公開・放映日または時期",
-    "cast": "主要キャスト2〜3名（あれば）",
-    "synopsis": "原作内容を1〜2文で",
-    "publisher": "出版社（あれば）",
+    "type": "movie か drama か anime",
+    "releaseDate": "公開・放映の時期（例: 2025年6月公開）",
+    "cast": "主要キャスト2〜3名（わかれば）",
+    "synopsis": "原作の内容を1〜2文で",
+    "publisher": "出版社（わかれば）",
     "isbn": "ISBN-13（わかれば、不明はnull）",
     "isNew": true か false（直近1ヶ月以内の発表・公開ならtrue）
   }
 ]
-最低6件、できれば10件。`;
+10件程度。`;
 
   try {
-    const res = await fetch('https://api.anthropic.com/v1/messages', {
+    // APIキーはサーバー側（/api/gemini）で管理 — ここには書かない
+    const res = await fetch('/api/gemini', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': window.__ANTHROPIC_API_KEY__ || '',
-        'anthropic-version': '2023-06-01',
-        'anthropic-dangerous-direct-browser-access': 'true'
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        model: 'claude-sonnet-4-6',
-        max_tokens: 4096,
-        tools: [{ type: 'web_search_20250305', name: 'web_search' }],
-        messages: [{ role: 'user', content: prompt }]
+        contents: [{ parts: [{ text: prompt }] }],
+        tools: [{ google_search: {} }],
+        generationConfig: { temperature: 0.2, maxOutputTokens: 4096 }
       })
     });
 
     if (!res.ok) {
       const err = await res.json().catch(() => ({}));
-      if (res.status === 401) throw new Error('APIキーが無効です。ファイル末尾の設定を確認してください。');
-      throw new Error(err.error?.message || `APIエラー (${res.status})`);
+      if (res.status === 429) throw new Error('リクエスト上限に達しました。しばらく待ってから再度お試しください。');
+      throw new Error(err.error?.message || `エラーが発生しました (${res.status})`);
     }
 
     const data = await res.json();
     statusBar.textContent = '書影を検索中…';
 
-    let rawText = data.content.filter(b => b.type === 'text').map(b => b.text).join('');
-    rawText = rawText.replace(/```json[\s\S]*?```/g, m => m.slice(7,-3).trim());
-    rawText = rawText.replace(/```[\s\S]*?```/g, m => m.slice(3,-3).trim());
-    const match = rawText.match(/\[[\s\S]*\]/);
+    const rawText = data.candidates?.[0]?.content?.parts
+      ?.filter(p => p.text)
+      ?.map(p => p.text)
+      ?.join('') || '';
+
+    const cleaned = rawText
+      .replace(/```json[\s\S]*?```/g, m => m.slice(7,-3).trim())
+      .replace(/```[\s\S]*?```/g, m => m.slice(3,-3).trim());
+
+    const match = cleaned.match(/\[[\s\S]*\]/);
     if (!match) throw new Error('レスポンスの解析に失敗しました。もう一度お試しください。');
 
     const items = JSON.parse(match[0]);
@@ -537,7 +318,7 @@ async function startSearch() {
 
     const withCovers = await Promise.all(items.map(enrichWithCover));
     renderGrid(withCovers);
-    statusBar.textContent = `${withCovers.length}件 ·  ${new Date().toLocaleDateString('ja-JP')} 取得`;
+    statusBar.textContent = `${withCovers.length}件を表示中　（Google検索使用 · ${new Date().toLocaleDateString('ja-JP')} 取得）`;
 
   } catch(e) {
     errorMsg.textContent = e.message || '予期しないエラーが発生しました。';
@@ -556,10 +337,11 @@ async function enrichWithCover(item) {
     const q = encodeURIComponent(`${item.originalTitle} ${item.author}`);
     const r = await fetch(`https://openlibrary.org/search.json?q=${q}&limit=3&lang=jpn`);
     const d = await r.json();
-    const docs = (d.docs && d.docs.length > 0) ? d.docs : await (async()=>{
+    let docs = d.docs || [];
+    if (docs.length === 0) {
       const r2 = await fetch(`https://openlibrary.org/search.json?q=${q}&limit=3`);
-      return (await r2.json()).docs || [];
-    })();
+      docs = (await r2.json()).docs || [];
+    }
     if (docs.length > 0) {
       if (docs[0].cover_i) item.coverUrl = `https://covers.openlibrary.org/b/id/${docs[0].cover_i}-M.jpg`;
       if (!item.isbn && docs[0].isbn) {
@@ -574,13 +356,11 @@ function renderGrid(items) {
   const grid = document.getElementById('grid');
   grid.innerHTML = '';
   items.forEach(item => {
-    const typeClass = {movie:'badge-film', drama:'badge-drama', anime:'badge-anime'}[item.type] || 'badge-film';
-    const typeLabel = {movie:'Film', drama:'Drama', anime:'Anime'}[item.type] || item.type;
-
+    const typeClass = { movie:'badge-film', drama:'badge-drama', anime:'badge-anime' }[item.type] || 'badge-film';
+    const typeLabel = { movie:'Film', drama:'Drama', anime:'Anime' }[item.type] || item.type;
     const coverHtml = item.coverUrl
-      ? `<img src="${esc(item.coverUrl)}" alt="${esc(item.originalTitle)}" onerror="this.parentElement.innerHTML=placeholderHtml()">`
-      : `<div class="cover-placeholder"><svg width="28" height="36" viewBox="0 0 28 36" fill="none"><rect x="1" y="1" width="26" height="34" rx="2" stroke="#c4bdb6" stroke-width="1.2"/><path d="M7 12h14M7 17h14M7 22h9" stroke="#c4bdb6" stroke-width="1" stroke-linecap="round"/></svg><span>書影なし</span></div>`;
-
+      ? `<img src="${esc(item.coverUrl)}" alt="${esc(item.originalTitle)}" onerror="this.parentElement.innerHTML=nocover()">`
+      : nocover();
     const card = document.createElement('div');
     card.className = 'card';
     card.innerHTML = `
@@ -596,15 +376,15 @@ function renderGrid(items) {
         <div class="card-author">${esc(item.author)}${item.publisher ? '　' + esc(item.publisher) : ''}</div>
         <div class="card-release">${esc(item.releaseDate)}</div>
         <div class="card-film-title">▸ ${esc(item.title)}</div>
-        ${item.cast ? `<div class="card-cast">出演 : ${esc(item.cast)}</div>` : ''}
+        ${item.cast     ? `<div class="card-cast">出演 : ${esc(item.cast)}</div>` : ''}
         ${item.synopsis ? `<div class="card-synopsis">${esc(item.synopsis)}</div>` : ''}
-        ${item.isbn ? `<div class="isbn-wrap"><span class="isbn-label">ISBN</span><span class="isbn-val">${esc(item.isbn)}</span></div>` : ''}
+        ${item.isbn     ? `<div class="isbn-wrap"><span class="isbn-label">ISBN</span><span class="isbn-val">${esc(item.isbn)}</span></div>` : ''}
       </div>`;
     grid.appendChild(card);
   });
 }
 
-function placeholderHtml() {
+function nocover() {
   return `<div class="cover-placeholder"><svg width="28" height="36" viewBox="0 0 28 36" fill="none"><rect x="1" y="1" width="26" height="34" rx="2" stroke="#c4bdb6" stroke-width="1.2"/><path d="M7 12h14M7 17h14M7 22h9" stroke="#c4bdb6" stroke-width="1" stroke-linecap="round"/></svg><span>書影なし</span></div>`;
 }
 
@@ -612,16 +392,7 @@ function esc(s) {
   if (!s) return '';
   return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
-window.placeholderHtml = placeholderHtml;
-</script>
-
-<!-- ===================================================
-  APIキーの設定:
-  YOUR_API_KEY_HERE を Anthropic Console で発行したキーに書き換えてください
-  https://console.anthropic.com
-=================================================== -->
-<script>
-  window.__ANTHROPIC_API_KEY__ = 'YOUR_API_KEY_HERE';
+window.nocover = nocover;
 </script>
 </body>
 </html>

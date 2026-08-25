@@ -308,24 +308,22 @@ async function startSearch() {
 
     if (!rawText) throw new Error('レスポンスが空でした。もう一度お試しください。');
 
-    // デバッグ：rawTextの先頭500文字を確認
-    alert('[rawText]\n' + rawText.slice(0, 500));
+    // コードブロック除去・トリム
+    let jsonText = rawText
+      .replace(/```json/g, '').replace(/```/g, '').trim();
 
-    // ¥をバックスラッシュに統一・コードブロック除去
-    const cleaned = rawText
-      .replace(/¥/g, '\\')
-      .replace(/```json[\s\S]*?```/g, m => m.slice(7,-3).trim())
-      .replace(/```[\s\S]*?```/g, m => m.slice(3,-3).trim());
+    // [ から始まる部分だけ切り出す
+    const start = jsonText.indexOf('[');
+    const end = jsonText.lastIndexOf(']');
+    if (start === -1 || end === -1) throw new Error('レスポンスの解析に失敗しました。もう一度お試しください。');
+    jsonText = jsonText.slice(start, end + 1);
 
-    const match = cleaned.match(/\[[\s\S]*\]/);
-    if (!match) throw new Error('レスポンスの解析に失敗しました。もう一度お試しください。');
-
-    // JSON文字列値内の生の改行をエスケープしてからパース
-    const jsonStr = match[0].replace(
-      /("(?:[^"\\]|\\.)*")|[\n\r\t]/g,
-      (m, str) => str ? str : (m === '\n' ? '\\n' : m === '\r' ? '\\r' : '\\t')
-    );
-    const items = JSON.parse(jsonStr);
+    let items;
+    try {
+      items = JSON.parse(jsonText);
+    } catch(e) {
+      throw new Error('JSONの解析に失敗しました: ' + e.message);
+    }
     statusBar.textContent = `${items.length}件取得 — 書影を検索中…`;
 
     const withCovers = await Promise.all(items.map(enrichWithCover));

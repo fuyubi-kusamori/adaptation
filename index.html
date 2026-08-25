@@ -308,6 +308,9 @@ async function startSearch() {
 
     if (!rawText) throw new Error('レスポンスが空でした。もう一度お試しください。');
 
+    // デバッグ：rawTextの先頭500文字を確認
+    alert('[rawText]\n' + rawText.slice(0, 500));
+
     // ¥をバックスラッシュに統一・コードブロック除去
     const cleaned = rawText
       .replace(/¥/g, '\\')

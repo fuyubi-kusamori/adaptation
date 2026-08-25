@@ -301,7 +301,15 @@ async function startSearch() {
     const data = await res.json();
     statusBar.textContent = '書影を検索中…';
 
-    const rawText = data.text || '';
+    // デバッグ：レスポンス構造を確認
+    console.log('[debug] full response:', JSON.stringify(data).slice(0, 1000));
+    alert('[デバッグ] レスポンス確認:\n' + JSON.stringify(data).slice(0, 500));
+
+    const rawText =
+      data.text ||
+      data?.candidates?.[0]?.content?.parts?.filter(p => p.text)?.map(p => p.text)?.join('') ||
+      '';
+
     if (!rawText) throw new Error('レスポンスが空でした。もう一度お試しください。');
 
     const cleaned = rawText
